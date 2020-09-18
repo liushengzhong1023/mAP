@@ -42,6 +42,7 @@ if args.set_class_iou is not None:
     specific_iou_flagged = True
 
 # make sure that the cwd() is the location of the python script (so that every path makes sense)
+# NOTE: change your GT and DR path here.
 GT_PATH = "/home/sl29/rvms/results/labels/segment-16213317953898915772_1597_170_1617_170_with_camera_labels"
 DR_PATH = "/home/sl29/rvms/results/predictions/segment-16213317953898915772_1597_170_1617_170_with_camera_labels"
 
