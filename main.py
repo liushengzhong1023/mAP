@@ -12,8 +12,8 @@ import numpy as np
 MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true")
-parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true")
+parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true", default=True)
+parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true", default=True)
 parser.add_argument('-q', '--quiet', help="minimalistic console output.", action="store_true")
 # argparse receiving list of classes to be ignored (e.g., python main.py --ignore person book)
 parser.add_argument('-i', '--ignore', nargs='+', type=str, help="ignore a list of classes.")
@@ -42,10 +42,9 @@ if args.set_class_iou is not None:
     specific_iou_flagged = True
 
 # make sure that the cwd() is the location of the python script (so that every path makes sense)
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+GT_PATH = "/home/sl29/rvms/results/labels/segment-16213317953898915772_1597_170_1617_170_with_camera_labels"
+DR_PATH = "/home/sl29/rvms/results/predictions/segment-16213317953898915772_1597_170_1617_170_with_camera_labels"
 
-GT_PATH = os.path.join(os.getcwd(), 'input', 'ground-truth')
-DR_PATH = os.path.join(os.getcwd(), 'input', 'detection-results')
 # if there are no images then no animation can be shown
 IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
 if os.path.exists(IMG_PATH): 
@@ -392,7 +391,9 @@ for txt_file in ground_truth_files_list:
             error_msg += "by running the script \"remove_space.py\" or \"rename_class.py\" in the \"extra/\" folder."
             error(error_msg)
         # check if class is in the ignore list, if yes skip
-        if class_name in args.ignore:
+        # if class_name in args.ignore:
+        #     continue
+        if class_name not in ['0', '1', '2', '10', '11']:
             continue
         bbox = left + " " + top + " " + right + " " +bottom
         if is_difficult:
@@ -766,7 +767,9 @@ for txt_file in dr_files_list:
     for line in lines_list:
         class_name = line.split()[0]
         # check if class is in the ignore list, if yes skip
-        if class_name in args.ignore:
+        # if class_name in args.ignore:
+        #     continue
+        if class_name not in ['0', '1', '2', '10', '11']:
             continue
         # count that object
         if class_name in det_counter_per_class:
