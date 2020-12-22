@@ -12,8 +12,8 @@ import numpy as np
 MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true")
-parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true")
+parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true", default=True)
+parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true", default=True)
 parser.add_argument('-q', '--quiet', help="minimalistic console output.", action="store_true")
 # argparse receiving list of classes to be ignored (e.g., python main.py --ignore person book)
 parser.add_argument('-i', '--ignore', nargs='+', type=str, help="ignore a list of classes.")
@@ -42,10 +42,16 @@ if args.set_class_iou is not None:
     specific_iou_flagged = True
 
 # make sure that the cwd() is the location of the python script (so that every path makes sense)
+# NOTE: change your GT and DR path here.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-GT_PATH = os.path.join(os.getcwd(), 'input', 'ground-truth')
-DR_PATH = os.path.join(os.getcwd(), 'input', 'detection-results')
+# GT_PATH = os.path.join(os.getcwd(), 'input', 'ground-truth')
+# DR_PATH = os.path.join(os.getcwd(), 'input', 'detection-results')
+
+GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels/all'
+DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/gaussian_yolov3_detections_full/all'
+# DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full/all'
+
 # if there are no images then no animation can be shown
 IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
 if os.path.exists(IMG_PATH): 
