@@ -12,6 +12,7 @@ import numpy as np
 MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
 parser = argparse.ArgumentParser()
+parser.add_argument('-dataset', help="Dataset to evaluate.", default='waymo')
 parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true", default=True)
 parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true", default=True)
 parser.add_argument('-q', '--quiet', help="minimalistic console output.", action="store_true")
@@ -45,12 +46,12 @@ if args.set_class_iou is not None:
 # NOTE: change your GT and DR path here.
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-# GT_PATH = os.path.join(os.getcwd(), 'input', 'ground-truth')
-# DR_PATH = os.path.join(os.getcwd(), 'input', 'detection-results')
-
-GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels/all'
-DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/gaussian_yolov3_detections_full/all'
-# DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full/all'
+if args.dataset == 'waymo':
+    GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_waymo/all'
+    DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_waymo/all'
+else:
+    GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_kitti/all'
+    DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_kitti/all'
 
 # if there are no images then no animation can be shown
 IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
