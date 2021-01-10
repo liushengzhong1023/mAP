@@ -48,7 +48,8 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 if args.dataset == 'waymo':
     GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_waymo/all'
-    DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_waymo/all'
+    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_waymo/all'
+    DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_waymo/all'
 else:
     GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_kitti/all'
     DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_kitti/all'
