@@ -55,6 +55,7 @@ else:
     GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_kitti/all'
     # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_kitti/all'
     DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_kitti/all'
+    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_kitti/all'
 
 # if there are no images then no animation can be shown
 IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
