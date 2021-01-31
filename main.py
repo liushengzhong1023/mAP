@@ -13,6 +13,7 @@ MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-dataset', help="Dataset to evaluate.", default='waymo')
+parser.add_argument('-detection_path', help="Path of the detections", default=None)
 parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true", default=True)
 parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true", default=True)
 parser.add_argument('-q', '--quiet', help="minimalistic console output.", action="store_true")
@@ -48,18 +49,24 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 if args.dataset == 'waymo':
     GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_waymo/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_waymo/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_waymo/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_waymo_with_flow/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_waymo/all'
-    DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_waymo_with_flow/all'
+    if args.detection_path:
+        DR_PATH = args.detection_path
+    else:
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_waymo/all'
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_waymo/all'
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_waymo_with_flow/all'
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_waymo/all'
+        DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_waymo_with_flow/all'
 else:
     GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_kitti/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_kitti/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_kitti/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_kitti_with_flow/all'
-    DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_kitti/all'
-    # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_kitti_with_flow/all'
+    if args.detection_path:
+        DR_PATh = args.detection_path
+    else:
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_kitti/all'
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_kitti/all'
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_kitti_with_flow/all'
+        DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_kitti/all'
+        # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_serialized_kitti_with_flow/all'
 
 # if there are no images then no animation can be shown
 IMG_PATH = os.path.join(os.getcwd(), 'input', 'images-optional')
