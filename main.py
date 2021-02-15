@@ -18,7 +18,7 @@ parser.add_argument('-na', '--no-animation', help="no animation is shown.", acti
 parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true", default=True)
 parser.add_argument('-q', '--quiet', help="minimalistic console output.", action="store_true")
 # argparse receiving list of classes to be ignored (e.g., python main.py --ignore person book)
-parser.add_argument('-i', '--ignore', nargs='+', type=str, help="ignore a list of classes.")
+parser.add_argument('-i', '--ignore', nargs='+', type=str, help="ignore a list of classes.", default='4')
 # argparse receiving list of classes with specific IoU (e.g., python main.py --set-class-iou person 0.7)
 parser.add_argument('--set-class-iou', nargs='+', type=str, help="set IoU for a specific class.")
 args = parser.parse_args()
@@ -417,6 +417,11 @@ for txt_file in ground_truth_files_list:
         if class_name in args.ignore:
             continue
         bbox = left + " " + top + " " + right + " " +bottom
+
+        # TODO: skip too small bboxes
+        if float(bottom) - float(top) < 180 and int(class_name) == 1:
+            is_difficult = True
+
         if is_difficult:
             bounding_boxes.append({"class_name":class_name, "bbox":bbox, "used":False, "difficult":True})
             is_difficult = False
@@ -691,7 +696,7 @@ with open(output_files_path + "/output.txt", 'w') as output_file:
         #print(rec)
         prec = tp[:]
         for idx, val in enumerate(tp):
-            prec[idx] = float(tp[idx]) / (fp[idx] + tp[idx])
+            prec[idx] = float(tp[idx]) / (fp[idx] + tp[idx] + 1e-8)
         #print(prec)
 
         ap, mrec, mprec = voc_ap(rec[:], prec[:])
