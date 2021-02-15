@@ -419,8 +419,8 @@ for txt_file in ground_truth_files_list:
         bbox = left + " " + top + " " + right + " " +bottom
 
         # TODO: skip too small bboxes
-        if float(bottom) - float(top) < 180 and int(class_name) == 1:
-            is_difficult = True
+        # if float(bottom) - float(top) < 180 and int(class_name) == 1:
+        #     is_difficult = True
 
         if is_difficult:
             bounding_boxes.append({"class_name":class_name, "bbox":bbox, "used":False, "difficult":True})
