@@ -9,10 +9,10 @@ import math
 
 import numpy as np
 
-MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
+MINOVERLAP = 0.75 # default value (defined in the PASCAL VOC2012 challenge)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-dataset', help="Dataset to evaluate.", default='waymo')
+parser.add_argument('-dataset', help="Dataset to evaluate.", default='kitti')
 parser.add_argument('-detection_path', help="Path of the detections", default=None)
 parser.add_argument('-na', '--no-animation', help="no animation is shown.", action="store_true", default=True)
 parser.add_argument('-np', '--no-plot', help="no plot is shown.", action="store_true", default=True)
@@ -60,7 +60,7 @@ if args.dataset == 'waymo':
 else:
     GT_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/labels_kitti/all'
     if args.detection_path:
-        DR_PATh = args.detection_path
+        DR_PATH = args.detection_path
     else:
         # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_full_kitti/all'
         # DR_PATH = '/home/sl29/DeepScheduling/result/yolov3_result/yolov3_detections_partial_merged_kitti/all'
