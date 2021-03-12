@@ -9,7 +9,7 @@ import math
 
 import numpy as np
 
-MINOVERLAP = 0.75 # default value (defined in the PASCAL VOC2012 challenge)
+MINOVERLAP = 0.5 # default value (defined in the PASCAL VOC2012 challenge)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-dataset', help="Dataset to evaluate.", default='kitti')
@@ -449,6 +449,7 @@ for txt_file in ground_truth_files_list:
     with open(new_temp_file, 'w') as outfile:
         json.dump(bounding_boxes, outfile)
 
+print(gt_counter_per_class)
 gt_classes = list(gt_counter_per_class.keys())
 # let's sort the classes alphabetically
 gt_classes = sorted(gt_classes)
